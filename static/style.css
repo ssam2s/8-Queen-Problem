@@ -1,0 +1,118 @@
+﻿@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400&display=swap');
+
+body 
+{
+    margin: 0;
+    line-height: 1.0;
+    font-family: 'Noto Sans KR', sans-serif;
+    background: #24272b;
+}
+
+.title
+{
+    margin: 2%;
+    position: absolute;
+    top: 5%;
+    left: 15%;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 3.5em;
+    color: hsla(0,0%,100%,.8);
+    text-shadow: 5px 10px 0.4em rgba(0,0,0,.8);
+}
+
+.title_background
+{
+    margin: 10px;
+    background: rgba(0,0,0,.2);
+    position: absolute;
+    top: 10px;
+    right: 20%;
+    left:20%;
+    height: 120px;
+    border-radius: 15px;
+    transition: background 3s ease 0s;
+}
+
+.body_background
+{
+    margin: 10px;
+    background: rgba(0,0,0,.2);
+    position: absolute;
+    top: 160px;
+    right: 10%;
+    left:10%;
+    height: 800px;
+    border-radius: 15px;
+    transition: background 3s ease 0s;
+}
+
+button
+{
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: rgba(0,0,0,0);
+    font-size: 1.1em;
+    border-top: none;
+    border-bottom: none;
+    border-color:hsla(0,0%,100%,.2);
+    border-radius: 10%;
+    color: hsla(0,0%,100%,.8);
+}
+
+button:active
+{
+    border-color:hsla(0,0%,100%,.2);
+    color: hsla(0,0%,100%,.2);
+}
+
+button:hover
+{
+    color: hsla(0,0%,100%,100);
+    cursor: pointer;
+}
+
+.board_background
+{
+    position: absolute;
+    background-color: rgba(0,0,0,.0);
+    background-color: white;
+    width: 750px;
+    height: 650px;
+    top: 100px;
+    left: 400px;
+}
+
+.white
+{
+    background-color: white;
+}
+
+.black
+{
+    background-color: black;
+}
+
+table
+{
+    width:600px;
+    height:500px;
+}
+
+#count_answer
+{
+    position: absolute;
+    top: 20%;
+    left: 83%;
+    font-size: 2em;
+    color: hsla(0,0%,100%,.8);
+}
+
+#explain
+{
+    position: absolute;
+    top: 10%;
+    font-size: 1.1em;
+    left: 1%;
+    color: hsla(0,0%,100%,.4);
+}

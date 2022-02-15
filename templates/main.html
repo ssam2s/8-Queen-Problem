@@ -1,0 +1,507 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>N-Queen Problem Solution</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel1="stylesheet" href1="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <section class="title_background">
+        <h1 class="title">Answer of N-Queen Problem</h1>
+    </section>
+    <section class="body_background">
+        <div class="N_buttons">
+            <button id="4-Queen" style="margin-top: 2%; margin-left: 35%">4-Queen</button>
+            <button id="5-Queen" style="margin-left: 2%">5-Queen</button>
+            <button id="6-Queen" style="margin-left: 2%">6-Queen</button>
+            <button id="7-Queen" style="margin-left: 2%">7-Queen</button>
+            <button id="8-Queen" style="margin-left: 2%">8-Queen</button>
+        </div>
+        <div id="explain">
+            N-Queen 문제의 해를 보여주는 웹페이지입니다.<br><br><br>
+            상단의 5개의 버튼 중 하나를 눌러<br><br><br>
+            체스 보드의 크기를 선택할 수 있으며<br><br><br>
+            양쪽의 이전, 다음 버튼을 눌러<br><br><br>
+            다음 해와 이전의 해를 볼 수 있습니다.<br><br><br>
+            오른쪽 상단의 수는 해당 체스보드에서<br><br><br>
+            나올 수 있는 해 중 현재 해의 순서를 나타냅니다.
+        </div>
+        <section class="board_background">
+            <div id="board" style="left : 25%; top: 25%"></div>
+        </section>
+        <div class="Stage_buttons">
+            <button id="Previous" style="margin-top: 25%; margin-left: 10%; font-size: 1.8em">이전</button>
+            <button id="Next" style="margin-left: 70%; font-size: 1.8em">다음</button>
+        </div>
+        <div id="count_answer"></div>
+    </section>
+</body>
+
+</html>
+
+
+<script type="text/javascript">
+    const menus = document.querySelectorAll("button");
+    var board = document.getElementById("board");
+    var table = document.createElement("table");
+    var count_answer = document.getElementById("count_answer");
+
+    var move = 1;
+
+    var data_index;
+    var index_4 = 0;
+    var index_5 = 0;
+    var index_6 = 0;
+    var index_7 = 0;
+    var index_8 = 0;
+
+    var count_4 = 2;
+    var count_5 = 10;
+    var count_6 = 4;
+    var count_7 = 40;
+    var count_8 = 92;
+
+    var count_4_ = 0;
+    var count_5_ = 0;
+    var count_6_ = 0;
+    var count_7_ = 0;
+    var count_8_ = 0;
+    
+    menus[0].onclick = function()   // 4-Queen
+    {
+        data_index = 4;
+        $(document).ready(function(){
+            $.ajax({
+                url: "pos_4.txt",
+                dataType:"text",
+                success:function(data)
+                {   
+                    var pos = data.split(/\r?\n|\r/);
+
+                    if (move == 1)
+                    {
+                        count_4_++;
+                        var pos_ = pos[index_4++].split('\t');
+                    }
+                    else if (move == 0)
+                    {
+                        count_4_--;
+                        var pos_ = pos[--index_4 - 1].split('\t');
+                    }
+                    
+                    if (count_4_ == count_4 + 1)
+                    {
+                        return;
+                    }
+                    else if (count_4_ == -1)
+                    {
+                        return;
+                    }
+
+                    table.innerHTML = "";
+                    for (var i = 1; i < 5; i++) 
+                    {
+                        var tr = document.createElement('tr');
+                        for (var j = 1; j < 5; j++) 
+                        {
+                            var td = document.createElement('td');
+                            if (i % 2 == j % 2) 
+                            {
+                                if (pos_[i - 1] == j)
+                                {
+                                    td.className = "white";
+                                    td.innerHTML = "<img src='Queen_image.png' width='180px' height='150px'>"; 
+                                }
+                                else
+                                {
+                                    td.className = "white";
+                                }
+                            } 
+                            else 
+                            {
+                                if (pos_[i - 1] == j)
+                                {
+                                    td.className = "black";
+                                    td.innerHTML = "<img src='Queen_image.png' width='180px' height='150px'>"; 
+                                }
+                                else
+                                {
+                                    td.className = "black";
+                                }
+                            }
+                            tr.appendChild(td);
+                        }
+                        table.appendChild(tr);
+                    }
+                    table.style.width = "750px";
+                    table.style.height = "650px";
+                    board.appendChild(table);
+                    move = 1;
+                    count_answer.innerHTML = count_4_ + " of "+ count_4;
+                }
+            });
+        });
+    }
+
+    menus[1].onclick = function()   // 5-Queen
+    {
+        data_index = 5;
+        $(document).ready(function(){
+            $.ajax({
+                url: "pos_5.txt",
+                dataType:"text",
+                success:function(data)
+                {
+                    var pos = data.split(/\r?\n|\r/);
+
+                    if (move == 1)
+                    {
+                        count_5_++;
+                        var pos_ = pos[index_5++].split('\t');
+                    }
+                    else if (move == 0)
+                    {
+                        count_5_--;
+                        var pos_ = pos[--index_5 - 1].split('\t');
+                    }
+
+                    if (count_5_ == count_5 + 1)
+                    {
+                        return;
+                    }
+                    else if (count_5_ == -1)
+                    {
+                        return;
+                    }
+
+                    table.innerHTML = "";
+                    for (var i = 1; i < 6; i++) 
+                    {
+                        var tr = document.createElement('tr');
+                        for (var j = 1; j < 6; j++) 
+                        {
+                            var td = document.createElement('td');
+                            if (i % 2 == j % 2) 
+                            {
+                                if (pos_[i - 1] == j)
+                                {
+                                    td.className = "white";
+                                    td.innerHTML = "<img src='Queen_image.png' width='145px' height='120px'>"; 
+                                }
+                                else
+                                {
+                                    td.className = "white";
+                                }
+                            } 
+                            else 
+                            {
+                                if (pos_[i - 1] == j)
+                                {
+                                    td.className = "black";
+                                    td.innerHTML = "<img src='Queen_image.png' width='145px' height='120px'>"; 
+                                }
+                                else
+                                {
+                                    td.className = "black";
+                                }
+                            }
+                            tr.appendChild(td);
+                        }
+                        table.appendChild(tr);
+                    }
+                    table.style.width = "750px";
+                    table.style.height = "650px";
+                    board.appendChild(table);
+                    move = 1;
+                    count_answer.innerHTML = count_5_ + "  of  " + count_5;
+                }
+            });
+        });
+    }
+    menus[2].onclick = function()   // 6-Queen
+    {
+        data_index = 6;
+        $(document).ready(function(){
+            $.ajax({
+                url: "pos_6.txt",
+                dataType:"text",
+                success:function(data)
+                {
+                    var pos = data.split(/\r?\n|\r/);
+                    
+                    if (move == 1)
+                    {
+                        count_6_++;
+                        var pos_ = pos[index_6++].split('\t');
+                    }
+                    else if (move == 0)
+                    {
+                        count_6_--;
+                        var pos_ = pos[--index_6 - 1].split('\t');
+                    }
+
+                    if (count_6_ == count_6 + 1)
+                    {
+                        return;
+                    }
+                    else if (count_6_ == -1)
+                    {
+                        return;
+                    }
+
+                    table.innerHTML = "";
+                    for (var i = 1; i < 7; i++) 
+                    {
+                        var tr = document.createElement('tr');
+                        for (var j = 1; j < 7; j++) 
+                        {
+                            var td = document.createElement('td');
+                            if (i % 2 == j % 2) 
+                            {
+                                if (pos_[i - 1] == j)
+                                {
+                                    td.className = "white";
+                                    td.innerHTML = "<img src='Queen_image.png' width='120px' height='95px'>"; 
+                                }
+                                else
+                                {
+                                    td.className = "white";
+                                }
+                            } 
+                            else 
+                            {
+                                if (pos_[i - 1] == j)
+                                {
+                                    td.className = "black";
+                                    td.innerHTML = "<img src='Queen_image.png' width='120px' height='95px'>"; 
+                                }
+                                else
+                                {
+                                    td.className = "black";
+                                }
+                            }
+                            tr.appendChild(td);
+                        }
+                        table.appendChild(tr);
+                    }
+                    table.style.width = "750px";
+                    table.style.height = "650px";
+                    board.appendChild(table);
+                    move = 1;
+                    count_answer.innerHTML = count_6_ + "  of  " + count_6;
+                }
+            });
+        });
+    }
+    menus[3].onclick = function()   // 7-Queen
+    {
+        data_index = 7;
+        $(document).ready(function(){
+            $.ajax({
+                url: "pos_7.txt",
+                dataType:"text",
+                success:function(data)
+                {
+                    var pos = data.split(/\r?\n|\r/);
+                    
+                    if (move == 1)
+                    {
+                        count_7_++;
+                        var pos_ = pos[index_7++].split('\t');
+                    }
+                    else if (move == 0)
+                    {
+                        count_7_--;
+                        var pos_ = pos[--index_7 - 1].split('\t');
+                    }
+
+                    if (count_7_ == count_7 + 1)
+                    {
+                        return;
+                    }
+                    else if (count_7_ == -1)
+                    {
+                        return;
+                    }
+
+                    table.innerHTML = "";
+                    for (var i = 1; i < 8; i++) 
+                    {
+                        var tr = document.createElement('tr');
+                        for (var j = 1; j < 8; j++) 
+                        {
+                            var td = document.createElement('td');
+                            if (i % 2 == j % 2) 
+                            {
+                                if (pos_[i - 1] == j)
+                                {
+                                    td.className = "white";
+                                    td.innerHTML = "<img src='Queen_image.png' width='100px' height='75px'>"; 
+                                }
+                                else
+                                {
+                                    td.className = "white";
+                                }
+                            } 
+                            else 
+                            {
+                                if (pos_[i - 1] == j)
+                                {
+                                    td.className = "black";
+                                    td.innerHTML = "<img src='Queen_image.png' width='100px' height='75px'>"; 
+                                }
+                                else
+                                {
+                                    td.className = "black";
+                                }
+                            }
+                            tr.appendChild(td);
+                        }
+                        table.appendChild(tr);
+                    }
+                    table.style.width = "750px";
+                    table.style.height = "650px";
+                    board.appendChild(table);
+                    move = 1;
+                    count_answer.innerHTML = count_7_ + "  of  " + count_7;
+                }
+            });
+        });
+    }
+    menus[4].onclick = function()   // 8-Queen
+    {
+        data_index = 8;
+        $(document).ready(function(){
+            $.ajax({
+                url: "pos_8.txt",
+                dataType:"text",
+                success:function(data)
+                {
+                    var pos = data.split(/\r?\n|\r/);
+                    
+                    if (move == 1)
+                    {
+                        count_8_++;
+                        var pos_ = pos[index_8++].split('\t');
+                    }
+                    else if (move == 0)
+                    {
+                        count_8_--;
+                        var pos_ = pos[--index_8 - 1].split('\t');
+                    }
+
+                    if (count_8_ == count_8 + 1)
+                    {
+                        return;
+                    }
+                    else if (count_8_ == -1)
+                    {
+                        return;
+                    }
+
+                    table.innerHTML = "";
+                    for (var i = 1; i < 9; i++) 
+                    {
+                        var tr = document.createElement('tr');
+                        for (var j = 1; j < 9; j++) 
+                        {
+                            var td = document.createElement('td');
+                            if (i % 2 == j % 2) 
+                            {
+                                if (pos_[i - 1] == j)
+                                {
+                                    td.className = "white";
+                                    td.innerHTML = "<img src='Queen_image.png' width='87px' height='65px'>"; 
+                                }
+                                else
+                                {
+                                    td.className = "white";
+                                }
+                            } 
+                            else 
+                            {
+                                if (pos_[i - 1] == j)
+                                {
+                                    td.className = "black";
+                                    td.innerHTML = "<img src='Queen_image.png' width='87px' height='65px'>"; 
+                                }
+                                else
+                                {
+                                    td.className = "black";
+                                }
+                            }
+                            tr.appendChild(td);
+                        }
+                        table.appendChild(tr);
+                    }
+                    table.style.width = "750px";
+                    table.style.height = "650px";
+                    board.appendChild(table);
+                    move = 1;
+                    count_answer.innerHTML = count_8_ + "  of  " + count_8;
+                }
+            });
+        });
+    }
+    menus[5].onclick = function()   // Previous
+    {
+        if (data_index == 4)
+        {
+            move = 0;
+            menus[0].onclick();
+        }
+        else if (data_index == 5)
+        {
+            move = 0;
+            menus[1].onclick();
+        }
+        else if (data_index == 6)
+        {
+            move = 0;
+            menus[2].onclick();
+        }
+        else if (data_index == 7)
+        {
+            move = 0;
+            menus[3].onclick();
+        }
+        else if (data_index == 8)
+        {
+            move = 0;
+            menus[4].onclick();
+        }
+    }
+    menus[6].onclick = function()   // Next
+    {
+        if (data_index == 4)
+        {
+            move = 1;
+            menus[0].onclick();
+        }
+        else if (data_index == 5)
+        {
+            move = 1;
+            menus[1].onclick();
+        }
+        else if (data_index == 6)
+        {
+            move = 1;
+            menus[2].onclick();
+        }
+        else if (data_index == 7)
+        {   
+            move = 1;
+            menus[3].onclick();
+        }
+        else if (data_index == 8)
+        {
+            move = 1;
+            menus[4].onclick();
+        }
+    }
+// https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStOk9vIRyw6GYCxZMvG--wTqKFPoW5rOXR3A&usqp=CAU
+</script>
